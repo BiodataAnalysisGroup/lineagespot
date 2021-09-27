@@ -3,9 +3,7 @@
 # Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: 
   pull_request:
-    branches: 
 
 name: R-CMD-check
 
@@ -34,7 +32,7 @@ jobs:
 
       - name: Check
         env:
-          _R_CHECK_CRAN_INCOMING_: false
+          _R_CHECK_CRAN_INCOMING_: true
           # Bioconductor R CMD check flags
           _R_CHECK_FORCE_SUGGESTS_: true
           _R_CHECK_RD_LINE_WIDTHS_: true
@@ -82,12 +80,12 @@ jobs:
           )
         shell: Rscript {0}
 
-      - name: Run BiocCheck
-        run: BiocCheck::BiocCheck(
-              `quit-with-status`=TRUE,
-              `no-check-R-ver`=TRUE,
-              `no-check-bioc-help`=TRUE)
-        shell: Rscript {0}
+      #- name: Run BiocCheck
+      #  run: BiocCheck::BiocCheck(
+      #        `quit-with-status`=TRUE,
+      #        `no-check-R-ver`=TRUE,
+      #        `no-check-bioc-help`=TRUE)
+      #  shell: Rscript {0}
 
       - name: Show testthat output
         if: always()
